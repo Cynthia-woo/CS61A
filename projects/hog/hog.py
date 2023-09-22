@@ -214,6 +214,9 @@ def always_roll(n):
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    def strategy(score, opponent_Score):
+        return n
+    return strategy
     # END PROBLEM 6
 
 
@@ -245,6 +248,18 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    i = 0
+    while i <= goal:
+        j = 0
+        roll = strategy(i, j)
+        while j <= goal:
+            if strategy(i, j) != roll:
+                return False
+            roll = strategy(i, j)
+            j += 1
+        i += 1
+    return True
+
     # END PROBLEM 7
 
 
@@ -261,6 +276,13 @@ def make_averaged(original_function, samples_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    
+    def new_func(*arg):
+        new, count = 0, 0
+        for i in range(samples_count):
+            count += original_function(*arg)
+        return count / samples_count
+    return new_func
     # END PROBLEM 8
 
 
@@ -275,6 +297,25 @@ def max_scoring_num_rolls(dice=six_sided, samples_count=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    
+    averaged_roll_dice = make_averaged(roll_dice,samples_count)
+    
+    array = [[None, None] for _ in range(10)]
+    for i in range(10):
+        array[i][0] = averaged_roll_dice(i+1, dice)
+        array[i][1] = i
+    max_number = array[0][0]
+    min_count = array[0][1] + 1
+    # print(array)
+    for i in range(10):
+        if array[i][0] > max_number:
+            max_number = array[i][0]
+            min_count = array[i][1] + 1 
+    return min_count
+
+        
+    # return max([(averaged_roll_dice(i, dice), i) for i in range(1, 11)], key=lambda x: x[0])[1]
+    
     # END PROBLEM 9
 
 
