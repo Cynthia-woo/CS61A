@@ -306,7 +306,6 @@ def max_scoring_num_rolls(dice=six_sided, samples_count=1000):
         array[i][1] = i
     max_number = array[0][0]
     min_count = array[0][1] + 1
-    # print(array)
     for i in range(10):
         if array[i][0] > max_number:
             max_number = array[i][0]
@@ -360,6 +359,8 @@ def boar_strategy(score, opponent_score, threshold=11, num_rolls=6):
     points, and returns NUM_ROLLS otherwise. Ignore score and Sus Fuss.
     """
     # BEGIN PROBLEM 10
+    if boar_brawl(score,opponent_score)>= threshold:
+        num_rolls = 0
     return num_rolls  # Remove this line once implemented.
     # END PROBLEM 10
 
@@ -367,6 +368,8 @@ def boar_strategy(score, opponent_score, threshold=11, num_rolls=6):
 def sus_strategy(score, opponent_score, threshold=11, num_rolls=6):
     """This strategy returns 0 dice when your score would increase by at least threshold."""
     # BEGIN PROBLEM 11
+    if sus_update(0, score, opponent_score)- score>= threshold:
+        num_rolls = 0
     return num_rolls  # Remove this line once implemented.
     # END PROBLEM 11
 
